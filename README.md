@@ -1,11 +1,11 @@
 # Disable AI Search
 
-A Chrome extension that automatically hides Google's AI Overview results by adding `-ai` to your search queries.
+A Chrome extension that lets you hide Google's AI Overview results by applying a selected search mode to Google searches.
 
 ## Features
 
-- Automatically adds `-ai` parameter to Google searches
-- Toggleable on/off via extension options
+- Select a mode: `None`, `-ai`, or `udm=14 (Web)`
+- Applies the selected mode to Google searches
 - Works on all Google search result pages
 - Enabled by default
 
@@ -19,17 +19,21 @@ A Chrome extension that automatically hides Google's AI Overview results by addi
 
 ## Usage
 
-The extension works automatically once installed. When you perform a Google search, it will automatically add `-ai` to your query, which tells Google to exclude AI Overview results.
+The extension works automatically once installed. When you perform a Google search, it will apply the selected mode:
+
+- `None` does not change the search URL
+- `-ai` appends `-ai` to your query
+- `udm=14 (Web)` adds `udm=14` to the URL
 
 ### Settings
 
 - Right-click the extension icon and select "Options"
 - Or go to `chrome://extensions/` → "Disable AI Search" → "Options"
-- Toggle the "Hide AI Overview results" checkbox to enable/disable
+- Choose a mode from the dropdown
 
 ## How it Works
 
-The extension monitors Google search URLs and automatically appends `-ai` to the search query parameter if it's not already present, then redirects to the updated URL.
+The extension monitors Google search URLs and applies the selected mode. Depending on the choice, it either appends `-ai` to the query or sets `udm=14`, then redirects to the updated URL.
 
 ## Limitations
 

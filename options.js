@@ -1,9 +1,28 @@
-const checkbox = document.getElementById('hideAI');
+const DEFAULT_MODE = 'udm14';
+const VALID_MODES = new Set(['none', 'ai', 'udm14']);
+const modeSelect = document.getElementById('mode');
 
-chrome.storage.sync.get(['hideAI'], (result) => {
-  checkbox.checked = result.hideAI !== false;
+function resolveMode({ mode, hideAI }) {
+  if (VALID_MODES.has(mode)) {
+    return mode;
+  }
+
+  if (hideAI === false) {
+    return 'none';
+  }
+
+  return DEFAULT_MODE;
+}
+
+chrome.storage.sync.get(['mode', 'hideAI'], (result) => {
+  const mode = resolveMode(result);
+  modeSelect.value = mode;
+
+  if (!VALID_MODES.has(result.mode)) {
+    chrome.storage.sync.set({ mode });
+  }
 });
 
-checkbox.addEventListener('change', () => {
-  chrome.storage.sync.set({ hideAI: checkbox.checked });
+modeSelect.addEventListener('change', () => {
+  chrome.storage.sync.set({ mode: modeSelect.value });
 });
