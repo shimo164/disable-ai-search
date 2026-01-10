@@ -25,6 +25,10 @@ chrome.storage.sync.get(['mode', 'hideAI'], (settings) => {
     return;
   }
 
+  if (params.has('tbm')) {
+    return;
+  }
+
   if (mode === 'ai') {
     if (!q.includes('-ai')) {
       params.set('q', q + ' -ai');
@@ -33,7 +37,10 @@ chrome.storage.sync.get(['mode', 'hideAI'], (settings) => {
     return;
   }
 
-  if (mode === 'udm14' && params.get('udm') !== '14') {
+  if (mode === 'udm14') {
+    if (params.has('udm')) {
+      return;
+    }
     params.set('udm', '14');
     location.replace('?' + params);
   }

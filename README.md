@@ -5,7 +5,8 @@ A Chrome extension that lets you hide Google's AI Overview results by applying a
 ## Features
 
 - Select a mode: `None`, `-ai`, or `udm=14 (Web)`
-- Applies the selected mode to Google searches
+- Applies the selected mode only on the default "All" results tab
+- Skips URLs that already include a `udm` parameter
 - Works on all Google search result pages
 - Enabled by default
 
@@ -19,7 +20,7 @@ A Chrome extension that lets you hide Google's AI Overview results by applying a
 
 ## Usage
 
-The extension works automatically once installed. When you perform a Google search, it will apply the selected mode:
+The extension works automatically once installed. When you perform a Google search on the default "All" tab, it will apply the selected mode:
 
 - `None` does not change the search URL
 - `-ai` appends `-ai` to your query
@@ -33,12 +34,14 @@ The extension works automatically once installed. When you perform a Google sear
 
 ## How it Works
 
-The extension monitors Google search URLs and applies the selected mode. Depending on the choice, it either appends `-ai` to the query or sets `udm=14`, then redirects to the updated URL.
+The extension monitors Google search URLs and applies the selected mode on the default "All" tab. Depending on the choice, it either appends `-ai` to the query or sets `udm=14`, then redirects to the updated URL. It skips URLs that already include `udm`, and does not run on non-"All" tabs (like Images, Shopping, News) that use `tbm` parameters.
 
 ## Limitations
 
 - Only works on `google.com` and `www.google.com`
 - Must search from google.com directly or from Google search result pages
+- Does not run on non-"All" tabs (Images, Shopping, News, etc.)
+- Does not change URLs that already include `udm`
 
 ## Files
 
